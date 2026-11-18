@@ -1,0 +1,11 @@
+name: keep-alive
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake the API so background jobs (auto-close, reminders) keep running
+        run: curl -fsS --max-time 60 https://dalilna-admin.runasp.net/health/live || curl -fsS --max-time 90 https://dalilna-admin.runasp.net/health/live
